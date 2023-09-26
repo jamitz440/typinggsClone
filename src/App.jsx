@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import "./App.css";
 import { InputBox } from "./InputBox";
 import { Button } from "./Button";
@@ -12,7 +12,7 @@ function App() {
   const [wordStates, setWordStates] = useState(Array(words.length).fill(false));
   const [wpm, setWpm] = useState(0);
   const [isDisabled, setIsDisabled] = useState(false);
-  const [focused, setFocused] = useState(false);
+  const inputRef = useRef(null);
 
   function fetchWords(ammount) {
     const randomWords = [];
@@ -29,42 +29,45 @@ function App() {
     setWordStates(Array(ammount).fill(false));
     setIsDisabled(false);
     setWpm(0);
-    setFocused(true);
+    inputRef.current.focus();
   }
 
   return (
-    <div className="text-center p-4  h-screen w-full">
-      <div className="border-2 border-gray-100 p-2 rounded-md mb-4">
-        <TextBox
-          words={words}
-          wordStates={wordStates}
-          currentWord={currentWord}
-        />
-      </div>
-      <div className="">
-        <InputBox
-          setCorrect={setCorrect}
-          currentWord={currentWord}
-          words={words}
-          setCurrentWord={setCurrentWord}
-          wordStates={wordStates}
-          setWordStates={setWordStates}
-          setWpm={setWpm}
-          isDisabled={isDisabled}
-          setIsDisabled={setIsDisabled}
-        />
-        <Stats wpm={wpm} />
-      </div>
-      <div className="infline-flex mt-4" role="group">
-        <Button classAddition="rounded-l-md border-2" fetchWords={fetchWords}>
-          25
-        </Button>
-        <Button classAddition=" border-b-2 border-t-2" fetchWords={fetchWords}>
-          50
-        </Button>
-        <Button classAddition="border-2 rounded-r-md" fetchWords={fetchWords}>
-          100
-        </Button>
+    <div className="flex justify-center items-center h-screen ">
+      <div className="text-center p-4">
+        <div className="border-2 border-gray-100 p-2 rounded-md mb-4 mx-auto w-1/2 ">
+          <TextBox
+            words={words}
+            wordStates={wordStates}
+            currentWord={currentWord}
+          />
+        </div>
+        <div className="">
+          <InputBox
+            setCorrect={setCorrect}
+            currentWord={currentWord}
+            words={words}
+            setCurrentWord={setCurrentWord}
+            wordStates={wordStates}
+            setWordStates={setWordStates}
+            setWpm={setWpm}
+            isDisabled={isDisabled}
+            setIsDisabled={setIsDisabled}
+            ref = {inputRef}
+          />
+          <Stats wpm={wpm} />
+        </div>
+        <div className="infline-flex mt-4" role="group">
+          <Button classAddition="rounded-l-md border-2" fetchWords={fetchWords}>
+            25
+          </Button>
+          <Button classAddition=" border-b-2 border-t-2" fetchWords={fetchWords}>
+            50
+          </Button>
+          <Button classAddition="border-2 rounded-r-md" fetchWords={fetchWords}>
+            100
+          </Button>
+        </div>
       </div>
     </div>
   );

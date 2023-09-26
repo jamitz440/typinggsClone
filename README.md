@@ -1,1 +1,1 @@
-Juts rebuilding Typings.cc as a little challenge for myself. 
+Just rebuilding Typings.gg as a little challenge for myself. 
