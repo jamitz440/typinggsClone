@@ -8,6 +8,10 @@ InputBox.propTypes = {
   setCurrentWord: PropTypes.func.isRequired,
   setWordStates: PropTypes.func.isRequired,
   wordStates: PropTypes.arrayOf(PropTypes.bool).isRequired,
+  setWpm: PropTypes.func,
+  isDisabled: PropTypes.bool,
+  setIsDisabled: PropTypes.func,
+  ref: PropTypes.object,
 };
 
 export function InputBox({
@@ -20,7 +24,7 @@ export function InputBox({
   setWpm,
   isDisabled,
   setIsDisabled,
-  ref
+  ref,
 }) {
   const [startTime, setStartTime] = useState(0);
   const [input, setInput] = useState("");
@@ -58,6 +62,7 @@ export function InputBox({
   }
   return (
     <input
+      id="inputBox"
       className="border-2 rounded-md w-96 px-1 font-medium text-gray-700 ring-gray-600 focus:border-gray-700 "
       disabled={isDisabled}
       type="text"

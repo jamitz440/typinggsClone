@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 Button.propTypes = {
   fetchWords: PropTypes.func.isRequired,
-  children: PropTypes.number.isRequired,
+  children: PropTypes.string.isRequired,
   classAddition: PropTypes.string,
 };
 

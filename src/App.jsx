@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./App.css";
 import { InputBox } from "./InputBox";
 import { Button } from "./Button";
@@ -12,7 +12,18 @@ function App() {
   const [wordStates, setWordStates] = useState(Array(words.length).fill(false));
   const [wpm, setWpm] = useState(0);
   const [isDisabled, setIsDisabled] = useState(false);
-  const inputRef = useRef(null);
+  const [focus, setFocus] = useState(false);
+
+  useEffect(
+    function () {
+      if (!focus) {
+        return;
+      }
+      document.getElementById("inputBox").focus();
+      setFocus(false);
+    },
+    [focus]
+  );
 
   function fetchWords(ammount) {
     const randomWords = [];
@@ -29,7 +40,7 @@ function App() {
     setWordStates(Array(ammount).fill(false));
     setIsDisabled(false);
     setWpm(0);
-    inputRef.current.focus();
+    setFocus(true);
   }
 
   return (
@@ -53,7 +64,6 @@ function App() {
             setWpm={setWpm}
             isDisabled={isDisabled}
             setIsDisabled={setIsDisabled}
-            ref = {inputRef}
           />
           <Stats wpm={wpm} />
         </div>
@@ -61,7 +71,10 @@ function App() {
           <Button classAddition="rounded-l-md border-2" fetchWords={fetchWords}>
             25
           </Button>
-          <Button classAddition=" border-b-2 border-t-2" fetchWords={fetchWords}>
+          <Button
+            classAddition=" border-b-2 border-t-2"
+            fetchWords={fetchWords}
+          >
             50
           </Button>
           <Button classAddition="border-2 rounded-r-md" fetchWords={fetchWords}>
