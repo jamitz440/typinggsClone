@@ -24,7 +24,7 @@ export function InputBox({
   setWpm,
   isDisabled,
   setIsDisabled,
-  ref,
+  inputRef,
 }) {
   const [startTime, setStartTime] = useState(0);
   const [input, setInput] = useState("");
@@ -68,7 +68,7 @@ export function InputBox({
       type="text"
       value={input}
       onChange={handleInput}
-      ref={ref}
+      ref={inputRef}
     />
   );
 }

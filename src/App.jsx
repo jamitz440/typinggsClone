@@ -14,12 +14,14 @@ function App() {
   const [isDisabled, setIsDisabled] = useState(false);
   const [focus, setFocus] = useState(false);
 
+  const inputEl = useRef();
+
   useEffect(
     function () {
       if (!focus) {
         return;
       }
-      document.getElementById("inputBox").focus();
+      inputEl.current.focus();
       setFocus(false);
     },
     [focus]
@@ -64,6 +66,7 @@ function App() {
             setWpm={setWpm}
             isDisabled={isDisabled}
             setIsDisabled={setIsDisabled}
+            inputRef={inputEl}
           />
           <Stats wpm={wpm} />
         </div>
