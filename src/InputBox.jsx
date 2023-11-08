@@ -25,9 +25,11 @@ export function InputBox({
   isDisabled,
   setIsDisabled,
   inputRef,
+  input,
+  setInput
 }) {
   const [startTime, setStartTime] = useState(0);
-  const [input, setInput] = useState("");
+  
 
   function handleInput(e) {
     if (e.target.value.slice(-1) === " ") {

@@ -13,6 +13,7 @@ function App() {
   const [wpm, setWpm] = useState(0);
   const [isDisabled, setIsDisabled] = useState(false);
   const [focus, setFocus] = useState(false);
+  const [input, setInput] = useState("");
 
   const inputEl = useRef();
 
@@ -28,6 +29,7 @@ function App() {
   );
 
   function fetchWords(ammount) {
+    setInput('')
     const randomWords = [];
 
     while (randomWords.length < ammount) {
@@ -67,6 +69,8 @@ function App() {
             isDisabled={isDisabled}
             setIsDisabled={setIsDisabled}
             inputRef={inputEl}
+            input={input}
+            setInput={setInput}
           />
           <Stats wpm={wpm} />
         </div>
